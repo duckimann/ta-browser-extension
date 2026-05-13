@@ -94,6 +94,7 @@ const videoAnchorSelector = [
   'a.ytLockupMetadataViewModelTitle[href]',
   'a.shortsLockupViewModelHostEndpoint.shortsLockupViewModelHostOutsideMetadataEndpoint[href]',
   'a#video-title[href]',
+  'a#wc-endpoint[href]',  // video in playlist nav
 ].join(', ');
 const channelContainerSelector = [
   'yt-flexible-actions-view-model.ytPageHeaderViewModelFlexibleActions',
