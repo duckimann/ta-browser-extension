@@ -94,7 +94,7 @@ const videoAnchorSelector = [
   'a.ytLockupMetadataViewModelTitle[href]',
   'a.shortsLockupViewModelHostEndpoint.shortsLockupViewModelHostOutsideMetadataEndpoint[href]',
   'a#video-title[href]',
-  'a#wc-endpoint[href]',  // video in playlist nav
+  'a#wc-endpoint[href]', // video in playlist nav
 ].join(', ');
 const channelContainerSelector = [
   'yt-flexible-actions-view-model.ytPageHeaderViewModelFlexibleActions',
@@ -279,12 +279,17 @@ function buildChannelSubButton(channelHandle) {
 
 function checkChannelSubscribed(channelSubButton) {
   function handleResponse(message) {
-    if (!message || (typeof message === 'object' && message.channel_subscribed === false)) {
+    if (
+      !message ||
+      (typeof message === 'object' && (message.channel_subscribed === false || message?.error))
+    ) {
       channelSubButton.innerText = 'Subscribe';
     } else if (typeof message === 'object' && message.channel_subscribed === true) {
       channelSubButton.innerText = 'Unsubscribe';
     } else {
       console.log('Unknown state');
+      buttonError(channelSubButton);
+      channelSubButton.innerText = 'Parsing failed';
     }
   }
   function handleError(e) {
