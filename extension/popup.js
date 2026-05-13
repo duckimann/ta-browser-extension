@@ -93,6 +93,11 @@ document.getElementById('autostart').addEventListener('click', function () {
   toggleAutostart();
 });
 
+// fast add
+document.getElementById('fastAdd').addEventListener('click', function () {
+  toggleFastAdd();
+});
+
 let fullUrlInput = document.getElementById('full-url');
 fullUrlInput.addEventListener('change', () => {
   browserType.storage.local.set({
@@ -166,6 +171,18 @@ function toggleAutostart() {
   let checked = document.getElementById('autostart').checked;
   let toStore = {
     autostart: {
+      checked: checked,
+    },
+  };
+  browserType.storage.local.set(toStore, function () {
+    console.log('stored option: ' + JSON.stringify(toStore));
+  });
+}
+
+function toggleFastAdd() {
+  let checked = document.getElementById('fastAdd').checked;
+  let toStore = {
+    fastAdd: {
       checked: checked,
     },
   };
@@ -283,9 +300,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('autostart').checked = true;
   }
 
-  browserType.storage.local.get(['access', 'popupFullUrl', 'popupApiKey'], function (result) {
-    onGot(result);
-  });
+  async function setFastAddOption(result) {
+    console.log(result);
+    if (!result.fastAdd || result.fastAdd.checked === false) {
+      console.log('fast add not set');
+      return;
+    }
+    console.log('set options: ' + JSON.stringify(result));
+    document.getElementById('fastAdd').checked = true;
+  }
+
+  browserType.storage.local.get(
+    ['access', 'popupFullUrl', 'popupApiKey', 'fastAdd'],
+    function (result) {
+      onGot(result);
+    }
+  );
 
   browserType.storage.local.get('continuousSync', function (result) {
     setContinuousCookiesOptions(result);
@@ -293,5 +323,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   browserType.storage.local.get('autostart', function (result) {
     setAutostartOption(result);
+  });
+  browserType.storage.local.get('fastAdd', function (result) {
+    setFastAddOption(result);
   });
 });

@@ -101,11 +101,19 @@ async function verifyConnection() {
 
 // send youtube link from injected buttons
 async function download(url) {
-  let apiURL = 'api/download/';
-  let autostart = await browserType.storage.local.get('autostart');
-  if (Object.keys(autostart).length > 0 && autostart.autostart.checked) {
-    apiURL += '?autostart=true';
+  const searchParams = new URLSearchParams();
+  const autoStart = await browserType.storage.local.get('autostart');
+  if (Object.keys(autoStart).length > 0 && autoStart.autostart.checked) {
+    searchParams.append('autostart', 'true');
   }
+  const fastAdd = await browserType.storage.local.get('fastAdd');
+  if (Object.keys(fastAdd).length > 0 && fastAdd.fastAdd.checked) {
+    // backend query param in TA is called flat
+    searchParams.append('flat', 'true');
+  }
+
+  const apiURL = `api/download/${searchParams.toString() ? `?${searchParams.toString()}` : ''}`;
+
   return await sendData(
     apiURL,
     {
