@@ -124,7 +124,7 @@ async function download(url) {
         },
       ],
     },
-    'POST'
+    'POST',
   );
 }
 
@@ -139,7 +139,7 @@ async function subscribe(url, subscribed) {
         },
       ],
     },
-    'POST'
+    'POST',
   );
 }
 

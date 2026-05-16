@@ -314,7 +314,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     ['access', 'popupFullUrl', 'popupApiKey', 'fastAdd'],
     function (result) {
       onGot(result);
-    }
+    },
   );
 
   browserType.storage.local.get('continuousSync', function (result) {
