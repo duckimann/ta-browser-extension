@@ -6,14 +6,6 @@
 <a href="https://chrome.google.com/webstore/detail/tubearchivist-companion/jjnkmicfnfojkkgobdfeieblocadmcie" target="_blank"><img src="https://tiles.tilefy.me/t/tubearchivist-chrome.png" alt="tubearchivist-chrome" title="TA Companion Chrome users" height="50" width="190"/></a>
 </div>
 
-## Core Functionality
-This is a browser extension to bridge YouTube with [Tube Archivist](https://github.com/tubearchivist/tubearchivist), your self hosted YouTube media server.
-- Add your Tube Archivist connection details in the addon popup.
-- On YouTube video pages, inject a download button to download that video and a subscribe button to subscribe to that channel.
-- On YouTube channel pages, inject a button to subscribe to the channel or download the complete channel. Regarding the channel subpages, this follows the same rules as adding to the queue over the form.
-- Throughout most places, hover over the video title to reveal a download button for that video.
-- Sync your cookies for yt-dlp.
-
 ## Screenshots
 ![popup screenshot](assets/tac-screenshot.png?raw=true "Tube Archivist Companion Popup")
 Popup to enter your connection details.
@@ -35,27 +27,12 @@ Channel button injected to subscribe or download whole channel, video download b
 - Firefox: The addon is available on the [Extension store](https://addons.mozilla.org/addon/tubearchivist-companion/).
 - Chrome: The addon is available on the [Chrome Web Store](https://chrome.google.com/webstore/detail/tubearchivist-companion/jjnkmicfnfojkkgobdfeieblocadmcie).
 
-## Update
-After a new release here on GitHub, you'll get updates automatically in your browser. Due to the verification process, for Firefox this usually takes 1-2 hours, for Chrome 2-3 days.
+## Docs
+User documentation is available on the official documentation page: [https://docs.tubearchivist.com/browser-extension/user-docs/](https://docs.tubearchivist.com/browser-extension/user-docs/).
 
-## Permissions
-- **Access your data for www.youtube.com**: Needed to inject download and subscribe buttons directly into the page.
-- **Storage**: Needed to store your connection details.
-- **Cookie**: Needed to read your cookies for youtube.com to access restricted videos.
+This documentation is built from a separate repo at [tubearchivist/docs](https://github.com/tubearchivist/docs).
 
-## Setup
-- **URL**: This is where your Tube Archivist instance is located. Can be a host name or an IP address. Add the port if needed at the end, e.g. `:8000`.
-- **API key**: You can find your API key on the settings page (Settings -> Application -> Integrations section -> API token) of your Tube Archivist instance.
-
-A green checkmark will appear next to the *Save* button if your connection is working.
-
-## Options
-- **Continuous Cookie Sync**: Automatically and continuously update the cookie on change.
-- **Copy Now**: Copy the cookie now to TA.
-- **Show Cookie**: Show the cookie on click, for copy paste. 
-- **Autostart**: Autostart and prioritize videos send from this extension.
-
-## Test this extension
+## Dev setup
 Before continuing loading the temporary extension here, make sure to deactivate/delete the main extension first.
 
 Symlink/copy the correct manifest file for your browser to the expected location, e.g. `ln -s manifest-firefox.json manifest.json`.
@@ -73,11 +50,7 @@ Symlink/copy the correct manifest file for your browser to the expected location
   - Click on *Service Worker* to open the dev tools at background.js. 
 
 Note:
-- If you are running your TA dev setup outside of the container, you need to point the URL to the backend and _not_ the frontend. E.g. localhost:8000 and not localhost:3000.
-
-## Compatibility
-- Verify that you are running the [latest version](https://github.com/tubearchivist/tubearchivist/releases/latest) of Tube Archivist as the API is under development and will change.
-- For testing this extension between releases, use the *unstable* builds of Tube Archivist, only for your testing environment.
+- If you are running your TA dev setup outside of the container, you need to point the URL to the API backend and _not_ the frontend. E.g. localhost:8000 and not localhost:3000.
 
 ## Roadmap
 Join us on [Discord](https://www.tubearchivist.com/discord) and help us improve and extend this project. This is a list of planned features, in no particular order:
